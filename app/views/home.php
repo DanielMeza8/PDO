@@ -3,10 +3,31 @@
         <div class="col py-5">
             <h1 class="display-1 text-center fw-bold"><strong>CRUD PHP</strong></h1>
             <p class="mt-4 fw-bolder">Este aplicacion te permitira hacer la operaciones CRUD</p>
-            <a href="./read" class="btn btn-info mt-4">Acceder al CRUD</a>
+            <div class="row py-4">
+                
+                <div class="d-flex justify-content-center">
+                    <div class="col-4">
+                        <span id="session" class="btn btn-success">Generar Session</span>
+                    </div>
+                    <div class="col-4">
+                        <a href="./read" class="btn btn-info mt-4">Acceder al CRUD</a>
+                    </div>    
+                </div>
+            </div>
+            <div class="row py-4">
+                <div class="d-flex justify-content-center">
+                    <div class="col-6">
+                        <a class="btn btn-warning" href="./comprobarSesion">Comprobar Session</a>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-danger" href="./salirSesion">Salir de la Session</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 
 <!--

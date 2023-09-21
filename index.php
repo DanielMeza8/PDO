@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,30 +18,64 @@
                     include "./app/views/home.php";
                     break;
                 case 'read':
-                    $contactos = $crud->read();
-                    include "./app/views/read.php";
+                    if (isset($_SESSION['id_session'])) {
+                        $contactos = $crud->read();
+                        include "./app/views/read.php";
+                    }else{
+                        header("location: ./home");
+                    } 
                     break;
                 case 'readCategorias':
-                    $categorias = $crud->readCategorias();
-                    include "./app/views/categorias/read.php";
+                    if (isset($_SESSION['id_session'])) {
+                        $categorias = $crud->readCategorias();
+                        include "./app/views/categorias/read.php";
+                    }else{
+                        header("location: ./home");
+                    } 
                     break;
                 case 'update':
-                    $contacto = $crud->show($_GET["id"]);
-                    include "./app/views/update.php";
+                    if (isset($_SESSION['id_session'])) {
+                        $contacto = $crud->show($_GET["id"]);
+                        include "./app/views/update.php";
+                    }else{
+                        header("location: ./home");
+                    } 
                     break;
                 case 'create':
-                    $categorias = $crud->readCategorias();
-                    include "./app/views/create.php";
+                    if (isset($_SESSION['id_session'])) {
+                        $categorias = $crud->readCategorias();
+                        include "./app/views/create.php";
+                    }else{
+                        header("location: ./home");
+                    } 
                     break;
                 case 'delete':
-                    include "./app/views/delete.php";
+                    if (isset($_SESSION['id_session'])) {
+                        include "./app/views/delete.php";
+                    }else{
+                        header("location: ./home");
+                    } 
                     break;
                 case 'categoriasAgregar':
-                    include "./app/views/categorias.agregar.php";
+                    if (isset($_SESSION['id_session'])) {
+                        include "./app/views/categorias.agregar.php";
+                    }else{
+                        header("location: ./home");
+                    } 
                     break;
                 case 'categoriasActualizar':
-                    $categorias = $crud->showCategoria($_GET["id"]);
-                    include "./app/views/categorias/update.php";
+                    if (isset($_SESSION['id_session'])) {
+                        $categorias = $crud->showCategoria($_GET["id"]);
+                        include "./app/views/categorias/update.php";
+                    }else{
+                        header("location: ./home");
+                    } 
+                    break;
+                case 'comprobarSesion':
+                    include "./app/views/login/comprobar.php";
+                    break;
+                case 'salirSesion':
+                    include "./app/controller/login/close.php";
                     break;
                 default:
                     header("location: ./read");
