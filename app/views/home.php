@@ -6,15 +6,15 @@
             <div class="row py-4">
                 
                 <div class="d-flex justify-content-center">
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                         <span id="session" class="btn btn-success">Generar Session</span>
-                    </div>
+                    </div> -->
                     <div class="col-4">
-                        <a href="./read" class="btn btn-info mt-4">Acceder al CRUD</a>
+                        <a href="./login" class="btn btn-info mt-4">Login</a>
                     </div>    
                 </div>
             </div>
-            <div class="row py-4">
+            <!-- <div class="row py-4">
                 <div class="d-flex justify-content-center">
                     <div class="col-6">
                         <a class="btn btn-warning" href="./comprobarSesion">Comprobar Session</a>
@@ -23,7 +23,7 @@
                         <a class="btn btn-danger" href="./salirSesion">Salir de la Session</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

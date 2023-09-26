@@ -1,9 +1,10 @@
 
+
 <div class="container mt-5 bg-light py-4">
     <div class="row">
         <div class="col">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="./home" class="btn btn-outline-info">Regresar</a>
+                <a href="./app/model/proccess/salir.php" class="btn btn-outline-info">Cerrar Session</a>
             </div>
             <h1>Lista de Contactos</h1>
             <hr>

@@ -67,3 +67,14 @@ CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY D
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+ALTER TABLE `agenda`.`contactos` 
+ADD INDEX `creadopo_idx` (`creadopor` ASC) VISIBLE;
+;
+ALTER TABLE `agenda`.`contactos` 
+ADD CONSTRAINT `creadopor`
+  FOREIGN KEY (`creadopor`)
+  REFERENCES `agenda`.`registro_usuario` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

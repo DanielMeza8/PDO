@@ -13,9 +13,12 @@
             $this->conexion= new PDO("mysql:host=$this->host;dbname=$this->bd", $this->username, $this->pass); //nos permite conectarnos a diferentes SGBD SQL
         }
 
-        public function read(){
-            $query = "SELECT * FROM dataagenda";
+        //INSERT INTO `agenda`.`contactos` (`nombre`, `email`, `telefono`, `idCategoria`, `creadopor`) VALUES ('prueba2', 'prueba2@gmail.com', '6578987649', '1', '2');
+
+        public function read($id){
+            $query = "SELECT * FROM dataagenda WHERE creadopor=:creadopor";
             $stmt = $this->conexion->prepare($query);
+            $stmt->bindParam(":creadopor", $id);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             unset($this->conexion);
@@ -32,12 +35,13 @@
         }
 
         public function create($data){
-            $query = "INSERT INTO `contactos` (nombre, telefono, email, idCategoria) Values (:nombre, :telefono, :email, :idCategoria)";
+            $query = "INSERT INTO `contactos` (nombre, telefono, email, idCategoria, creadopor) Values (:nombre, :telefono, :email, :idCategoria, :creadopor)";
             $stmt = $this->conexion->prepare($query);
             $stmt->bindParam(":nombre", $data["nombre"]);
             $stmt->bindParam(":telefono", $data["telefono"]);
             $stmt->bindParam(":email", $data["email"]);
             $stmt->bindParam(":idCategoria", $data["idCategoria"]);
+            $stmt->bindParam(":creadopor", $data["creadopor"]);
             $stmt->execute();
             unset($this->conexion);
             return json_encode($stmt);
@@ -119,6 +123,40 @@
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             unset($this->conexion);
             return $result;
+        }
+
+        public function login($email, $password){
+            $query = "SELECT * FROM registro_usuario WHERE email=:email AND password=:password";
+            $stmt = $this->conexion->prepare($query);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":password", $password);
+            $stmt->execute();
+            // $numrows = $stmt->fetchColumn();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            unset($this->conexion);
+            if ($result) {
+                $_SESSION['usuario'] = $result["id"];
+                header("location:../../../read");
+            } else { ?>
+                <script>
+                    alert("EL usuario o el password son incorrectos");
+                    window.location.assign("../../../login");
+                </script>
+            <?php 
+            }
+
+        }
+
+
+        public function registro($email,$password){
+            $query = "INSERT INTO `registro_usuario` (email, password) VALUES (:email, :password)";
+            $stmt = $this->conexion->prepare($query);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":password", $password);
+            $stmt->execute();
+            unset($this->conexion);
+            return json_encode($stmt);
+
         }
     }
 
